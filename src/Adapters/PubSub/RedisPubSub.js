@@ -1,10 +1,11 @@
 import { createClient } from 'redis';
+import logger from '../../logger';
 
 function createPublisher({ redisURL, redisOptions = {} }): any {
   redisOptions.no_ready_check = true;
   const client = createClient({ url: redisURL, ...redisOptions });
    client.on('error', err => {
-    _logger.default.error('RedisCacheAdapter Publisher client error', {
+    logger.default.error('RedisCacheAdapter Publisher client error', {
       error: err
     });
   });
@@ -19,7 +20,7 @@ function createSubscriber({ redisURL, redisOptions = {} }): any {
   redisOptions.no_ready_check = true;
   const client = createClient({ url: redisURL, ...redisOptions });
    client.on('error', err => {
-    _logger.default.error('RedisCacheAdapter Subscriber client error', {
+    logger.default.error('RedisCacheAdapter Subscriber client error', {
       error: err
     });
   });
