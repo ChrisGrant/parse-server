@@ -103,8 +103,10 @@ class Client {
           keys = this.subscriptionInfos.get(subscriptionId).keys;
         }
         response['object'] = this._toJSONWithFields(parseObjectJSON, keys);
+        response['object']["__type"] = "Object";
         if (parseOriginalObjectJSON) {
           response['original'] = this._toJSONWithFields(parseOriginalObjectJSON, keys);
+          response['original']["__type"] = "Object";
         }
       }
       Client.pushResponse(this.parseWebSocket, JSON.stringify(response));
